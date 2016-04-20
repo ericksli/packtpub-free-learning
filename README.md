@@ -10,8 +10,8 @@ You can set a cron job to run this script everyday.
 
 ## Usage
 
-````
-$ casperjs redeem.js foo@example.com foobar
-````
+Before running the script, please rename `config-example.json` to `config.json` and update the values.
 
-The first parameter is the login email and the second one is the login password.
+````
+$ casperjs redeem.js
+````

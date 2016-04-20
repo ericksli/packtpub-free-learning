@@ -2,31 +2,23 @@
  * Claim the daily free book from Packt.
  */
 
+var config = require('./config.json');
 var casper = require('casper').create({
     // verbose: true,
     logLevel: "debug"
 });
 casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36');
 
-var email;
-var password;
-var bookTitle;
-var bookDesc;
+var email = config.email;
+var password = config.password;
+var bookTitle = "";
+var bookDesc = "";
+var telegramBotToken = config.telegramBotToken;
+var telegramChannelId = config.telegramChannelId;
 
 casper.start('https://www.packtpub.com/packt/offers/free-learning', function () {
     this.viewport(1366, 768);
 
-    // Check the parameters
-    if (!casper.cli.has(0)) {
-        this.die("Missing parameter 1: login email", 1);
-    }
-    if (!casper.cli.has(1)) {
-        this.die("Missing parameter 2: login password", 1);
-    }
-    email = casper.cli.get(0);
-    password = casper.cli.get(1);
-});
-casper.then(function () {
     bookTitle = this.fetchText('.dotd-main-book-summary .dotd-title h2').trim();
     bookDesc = this.fetchText('.dotd-main-book-summary p').trim();
     this.echo("Today's book: " + bookTitle + "\n" + bookDesc, 'INFO');
@@ -62,6 +54,26 @@ casper.waitForUrl('https://www.packtpub.com/account/my-ebooks', function () {
 });
 casper.then(function () {
     this.echo('Logged out', 'INFO');
+});
+casper.then(function () {
+    var message = "*" + bookTitle + "*\n" +
+        bookDesc + "\n" +
+        "https://www.packtpub.com/packt/offers/free-learning";
+
+    this.open('https://api.telegram.org/bot' + telegramBotToken + '/sendMessage', {
+        method: 'POST',
+        data: {
+            'chat_id': telegramChannelId,
+            'parse_mode': 'Markdown',
+            'text': message
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }, function () {
+        this.echo('Publish to Telegram channel', 'INFO');
+    });
 });
 
 casper.run();
