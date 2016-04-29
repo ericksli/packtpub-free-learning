@@ -8,6 +8,7 @@ var casper = require('casper').create({
     logLevel: "debug"
 });
 casper.userAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36');
+casper.options.waitTimeout = 60000;
 
 var email = config.email;
 var password = config.password;
@@ -47,7 +48,7 @@ casper.waitForSelector(".book-claim-token-inner input[type='submit']", function 
     this.echo('Click claim button again', 'INFO');
     this.click(".book-claim-token-inner input[type='submit']")
 });
-casper.waitForUrl('https://www.packtpub.com/account/my-ebooks', function () {
+casper.then(function () {
     // Click logout link
     this.echo('Claimed the book ' + bookTitle + '!', 'GREEN_BAR');
     this.click("a[href='/logout']");
