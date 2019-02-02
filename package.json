@@ -1,0 +1,16 @@
+{
+  "name": "packtpub",
+  "version": "2.0.0",
+  "description": "PacktPub Free Learning",
+  "main": "packtpub.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eric Li",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
+    "puppeteer": "^1.12.1"
+  }
+}

@@ -1,17 +1,13 @@
-# Packt Publishing Free Learning Book
+# PacktPub Free Learning
 
-Claim the [daily free title](https://www.packtpub.com/packt/offers/free-learning) automatically by running the script.
-You can set a cron job to run this script everyday.
+A simple NodeJS script using [Puppeteer](https://github.com/GoogleChrome/puppeteer) to extract today's free book information and send it to Telegram channel.
 
-## Requirements
+## Setup
 
-* [CasperJS](http://casperjs.org/) 1.1.0
-* Packtpub account
+Prepare _.env_ file in the project directory and fill in the credentials.
 
-## Usage
-
-Before running the script, please rename `config-example.json` to `config.json` and update the values.
-
-````
-$ casperjs redeem.js
-````
+```
+HEADLESS=true
+TELEGRAM_BOT_TOKEN=XXXXXXXXX
+TELEGRAM_CHANNEL_ID=123456789
+```

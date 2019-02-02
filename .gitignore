@@ -1,4 +1,22 @@
-config.json
+# Logs
+logs
+*.log
+npm-debug.log*
 
-.idea
-*.iml
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+
+# IDE
+.idea/
