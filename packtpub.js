@@ -10,8 +10,8 @@ async function extractBookInfo() {
         await page.goto('https://www.packtpub.com/packt/offers/free-learning');
         await page.waitForSelector('#free-learning-dropin');
         const bookInfo = {
-            title: (await page.$eval('h2.product__title', el => el.innerText)).trim(),
-            author: (await page.$eval('p.product__author', el => el.innerText)).trim(),
+            title: (await page.$eval('h1.product__title', el => el.innerText)).trim(),
+            author: (await page.$eval('h1.product__title + p', el => el.innerText)).trim(),
             publicationDate: (await page.$eval('p.product__publication-date', el => el.innerText)).trim()
         };
         await browser.close();
