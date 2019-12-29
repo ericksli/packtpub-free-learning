@@ -9,8 +9,8 @@
   "author": "Eric Li",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.1",
-    "dotenv": "^6.2.0",
-    "puppeteer": "^1.12.1"
+    "axios": "^0.19.0",
+    "dotenv": "^8.2.0",
+    "puppeteer": "^2.0.0"
   }
 }
