@@ -8,7 +8,7 @@ async function extractBookInfo() {
         const browser = await puppeteer.launch({headless: process.env.HEADLESS === 'true'});
         const page = await browser.newPage();
         await page.goto('https://www.packtpub.com/packt/offers/free-learning');
-        await page.waitForSelector('#free-learning-dropin');
+        await page.waitForSelector('#free-learning-dropin .product__info');
         const bookInfo = {
             title: (await page.$eval('h1.product__title', el => el.innerText)).trim(),
             author: (await page.$eval('h1.product__title + p', el => el.innerText)).trim(),
